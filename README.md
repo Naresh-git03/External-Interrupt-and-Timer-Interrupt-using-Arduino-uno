@@ -13,7 +13,9 @@ LED
 10 kΩ Resistor (Pull-down, optional if not using INPUT_PULLUP)
 Jumper Wires
 ## Circuit Diagram
-To upload
+
+<img width="827" height="412" alt="640778642-124fe722-66eb-4c0d-88bf-156973c9e7cb" src="https://github.com/user-attachments/assets/0ea0ece9-94ec-43a8-b2f4-16dfab74cd69" />
+
 ## Procedure
 Step 1: Assemble the Circuit
 Place the Arduino UNO, breadboard, push button, LED, and resistor on the workbench.
@@ -45,7 +47,45 @@ Confirm that pressing the push button immediately triggers the external interrup
 Confirm that the timer interrupt executes periodically without polling.
 Record the observations.
 ## Program
-To upload
+```c
+
+const int interruptPin = 2;
+volatile bool ledState = false;
+volatile unsigned long lastDebounceTime = 0; 
+const unsigned long debounceDelay = 250;
+
+void toggleLedISR() {
+  unsigned long currentTime = millis();
+  
+  if ((currentTime - lastDebounceTime) > debounceDelay) {
+    ledState = !ledState;
+    digitalWrite(LED_BUILTIN, ledState ? HIGH : LOW);
+    
+    lastDebounceTime = currentTime;
+  }
+}
+
+void setup() {
+  Serial.begin(115200);
+
+  pinMode(LED_BUILTIN, OUTPUT);
+  digitalWrite(LED_BUILTIN, LOW); 
+
+  pinMode(interruptPin, INPUT_PULLUP);
+  
+  attachInterrupt(digitalPinToInterrupt(interruptPin), toggleLedISR, FALLING);
+
+  Serial.println("Arduino ready! Press the button on Pin 2 to toggle the LED.");
+}
+
+void loop() {
+
+}
+```
+## OUTPUT
+
+![Uploading 640777166-3dbc9e1b-18fe-456f-9912-c78b534abeac.png…]()
+
 Observation
 Activity	Expected Output
 Board Powered ON	System initializes
