@@ -84,7 +84,8 @@ void loop() {
 ```
 ## OUTPUT
 
-![Uploading 640777166-3dbc9e1b-18fe-456f-9912-c78b534abeac.png…]()
+<img width="578" height="1280" alt="640777166-3dbc9e1b-18fe-456f-9912-c78b534abeac" src="https://github.com/user-attachments/assets/1b5049c0-0b01-4f3e-9f6a-612d5cfb9dbf" />
+
 
 Observation
 Activity	Expected Output
